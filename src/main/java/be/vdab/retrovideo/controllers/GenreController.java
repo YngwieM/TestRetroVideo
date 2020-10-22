@@ -24,7 +24,7 @@ public class GenreController {
 
     @GetMapping("id")
     public ModelAndView genre( long id) {
-        var modelAndView = new ModelAndView("index");
+        var modelAndView = new ModelAndView("genre");
         genreService.findById(id).ifPresent(genre -> modelAndView.addObject(genre));
         return modelAndView;
     }

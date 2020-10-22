@@ -1,4 +1,4 @@
-package com.example.retrovideo2;
+package be.vdab.retrovideo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
