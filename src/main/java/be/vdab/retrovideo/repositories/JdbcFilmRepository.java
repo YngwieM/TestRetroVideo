@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Repository
  class JdbcFilmRepository implements FilmRepository{
@@ -46,4 +47,13 @@ import java.util.Optional;
         } catch (IncorrectResultSizeDataAccessException ex) {
             return Optional.empty();
         }}
+
+    @Override
+    public List<Film> findByIds(Set<Long> ids) {
+        if (ids.isEmpty()) {
+            return List.of();
+        }
+        var sql = "select id,genreid, titel, voorraad, gereserveerd,prijs from films where id in (" + "?,".repeat(ids.size() - 1) +"?) order by id";
+        return template.query(sql, ids.toArray(), filmRowMapper);
+    }
 }

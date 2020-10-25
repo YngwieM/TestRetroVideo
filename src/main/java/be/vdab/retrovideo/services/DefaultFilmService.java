@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 @Transactional
@@ -29,6 +30,11 @@ import java.util.Optional;
     @Override
     public Optional<Film> findByGenreId(long id) {
         return filmRepository.findByGenreId(id);
+    }
+
+    @Override
+    public List<Film> findByIds(Set<Long> ids) {
+        return filmRepository.findByIds(ids);
     }
 }
 

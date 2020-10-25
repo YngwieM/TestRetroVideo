@@ -23,7 +23,7 @@ public class FilmController {
     }
 
     @GetMapping("{id}")
-    public ModelAndView genre(@PathVariable long id) {
+    public ModelAndView film(@PathVariable long id) {
         var modelAndView = new ModelAndView("genre");
         filmService.findByGenreId(id).ifPresent(film -> modelAndView.addObject(film));
         return modelAndView;
