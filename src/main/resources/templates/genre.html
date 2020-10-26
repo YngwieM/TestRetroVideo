@@ -2,9 +2,11 @@
 <html lang="nl" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments::head(title=${genres} == null ?
 'Genres' : ${film})"></head>
-<body>
+<head th:replace="fragments::head(title='Frituur Frida')"></head>
 <nav th:replace="fragments::menu"></nav>
-<h1 th:if="not ${genre}">
+<body>
+<!--<nav th:replace="fragments::menu"></nav>-->
+<!--<h1 th:if="not ${genre}">-->
 
 </h1>
 <h1 th:text="*{genre}"></h1>

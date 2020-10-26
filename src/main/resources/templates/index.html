@@ -5,14 +5,7 @@
 <body>
 
 
-    <h1>Genres</h1>
-<ul class="naastMekaar">
 
-    <li th:each="genre:${genres}" th:object="${genre}">
-        <a th:href="@{/{id}(id=*{id})}" th:text="*{naam}"></a>
-
-    </li>
-</ul>
 
 
 </body>

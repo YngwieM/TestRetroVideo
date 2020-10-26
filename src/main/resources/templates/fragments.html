@@ -5,10 +5,21 @@
                 <a th:href="@{/mandje}">Mandje</a>
                 <a th:href="@{/beginletter}">Klant</a></li>
         </ul>
+
+        <h1>Genres</h1>
+        <ul class="naastMekaar">
+
+            <li th:each="genre:${genres}" th:object="${genre}">
+                <a th:href="@{/{id}(id=*{id})}" th:text="*{naam}"></a>
+
+            </li>
+        </ul>
     </nav>
     <head th:fragment="head(title)">
         <link rel="icon" th:href="@{/images/frida.ico}" type="image/x-icon">
         <title th:text="${title}"></title>
         <link rel="stylesheet" th:href="@{/css/FridaCSS.css}">
     </head>
+    <h1>Genres</h1>
+
 </div>
