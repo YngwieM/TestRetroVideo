@@ -1,15 +1,13 @@
 package be.vdab.retrovideo.repositories;
 
 import be.vdab.retrovideo.domain.Film;
-import be.vdab.retrovideo.domain.Genre;
+import be.vdab.retrovideo.exceptions.FilmUitVoorraadException;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Repository
  class JdbcFilmRepository implements FilmRepository{
@@ -34,18 +32,21 @@ import java.util.Set;
     public Optional<Film> findById(long id) {
         try {
             var sql ="select id,genreid, titel, voorraad, gereserveerd,prijs from films where id = ?";
-            return Optional.of(template.queryForObject(sql, filmRowMapper, id));
+            Optional<Film> films = Optional.of(template.queryForObject(sql, filmRowMapper, id));
+            return films;
         } catch (IncorrectResultSizeDataAccessException ex) {
             return Optional.empty();
         }}
 
     @Override
-    public Optional<Film> findByGenreId(long id) {
+    public List<Film> findByGenreId(long id) {
         try {
             var sql ="select id,genreid, titel, voorraad, gereserveerd,prijs from films where genreid = ?";
-            return Optional.of(template.queryForObject(sql, filmRowMapper, id));
+            List<Film> films = template.query(sql, filmRowMapper, id);
+
+            return films;
         } catch (IncorrectResultSizeDataAccessException ex) {
-            return Optional.empty();
+            return Collections.emptyList();
         }}
 
     @Override
@@ -55,5 +56,13 @@ import java.util.Set;
         }
         var sql = "select id,genreid, titel, voorraad, gereserveerd,prijs from films where id in (" + "?,".repeat(ids.size() - 1) +"?) order by id";
         return template.query(sql, ids.toArray(), filmRowMapper);
+    }
+
+    @Override
+    public void update(long id) {
+        var sql = "update films set voorraad = voorraad - 1, gereserveerd = gereserveerd + 1 where id = ?";
+        template.update(sql,id);
+
+
     }
 }

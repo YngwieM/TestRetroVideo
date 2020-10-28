@@ -1,12 +1,50 @@
 <!doctype html>
 <html lang="nl" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments::head(title='Mandje')"></head>
-<nav th:replace="fragments::menu"></nav>
+<nav th:fragment="menu">
+    <ul >
+        <li><a th:href="@{/genre}">Genres</a>
+            <a th:href="@{/mandje}">Mandje</a>
+            <a th:href="@{/klanten/beginletter/form}">Klant</a></li>
+    </ul>
+</nav>
 <body>
 <h1>Mandje</h1>
-<ul th:if="not ${films.empty}">
-    <li th:each="film:${films}" th:text="${film.titel}"></li>
-</ul>
+<form th:if="not ${films.empty}" th:action="@{/mandje/verwijderen}"
+      method="post">
+
+<table>
+    <thead>
+    <tr>
+        <th>Film</th>
+        <th>Prijs</th>
+        <th><button>Verwijderen</button></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="film:${films}">
+        <td th:text="${film.titel}">titel</td>
+        <td th:text="${'€' + film.prijs}">12,12 euro</td>
+        <td><input type="checkbox" name="id" th:value="${film.id}"></td>
+    </tr>
+    </tbody>
+</table>
+</form>
+
+
+
+
+
 <div th:if="${films.empty}">Je mandje is leeg.</div>
+</div>
+
 </body>
 </html>
+
+
+<!--<div class="column">-->
+<!--    <div class="column">-->
+<!--        <div class="row" th:text="${film.titel +' '+ film.getPrijs() }"><input type="checkbox" name="id" th:value="*{films}"></div>-->
+<!--    </div>-->
+
+<!--</div>-->

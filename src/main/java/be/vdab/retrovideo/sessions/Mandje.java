@@ -15,6 +15,7 @@ public class Mandje implements Serializable {
     public void voegToe(long id) {
         ids.add(id);
     }
+    public void delete(long id) {ids.remove(id);}
 
     public Set<Long> getIds() {
         return ids;

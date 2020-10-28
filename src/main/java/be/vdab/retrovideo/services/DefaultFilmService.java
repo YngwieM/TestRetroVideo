@@ -2,7 +2,6 @@ package be.vdab.retrovideo.services;
 
 import be.vdab.retrovideo.domain.Film;
 import be.vdab.retrovideo.repositories.FilmRepository;
-import be.vdab.retrovideo.repositories.GenreRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,7 +27,7 @@ import java.util.Set;
     }
 
     @Override
-    public Optional<Film> findByGenreId(long id) {
+    public List<Film> findByGenreId(long id) {
         return filmRepository.findByGenreId(id);
     }
 
@@ -36,6 +35,9 @@ import java.util.Set;
     public List<Film> findByIds(Set<Long> ids) {
         return filmRepository.findByIds(ids);
     }
+
+    @Override
+    public void update(long id) {filmRepository.update(id);}
 }
 
 

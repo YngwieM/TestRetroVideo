@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="nl" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments::head(title=${filmId} == null ?
+'Film niet gevonden' : ${film.naam})"></head>
+<body>
+<nav th:replace="fragments::menu"></nav>
+<!--<h1 th:if="not ${filmId}">Film niet gevonden:-->
+<!--    <span th:text="${id}"></span>-->
+<!--</h1>-->
+<div th:if="${film}" th:object="${film}">
+    <h1 th:text="*{titel}"></h1>
+
+
+    <img th:src="${'/images/' + film.id + '.jpg'}" th:alt="${film.titel}"/>
+
+    <dl>
+        <dt>Prijs</dt>
+        <dd th:text="${film.getPrijs()}"></dd>
+        <dt>Voorraad</dt>
+        <dd th:text="${film.getVoorraad()}"></dd>
+        <dt>Gereserveerd</dt>
+        <dd th:text="${film.getGereserveerd()}"></dd>
+        <dt>Beschikbaar</dt>
+        <dd th:text="${film.getVoorraad() - film.getGereserveerd()}"></dd>
+
+    </dl>
+    <form method="post" th:action="@{/mandje/{id}(id=*{id})}">
+        <button>In mandje</button>
+    </form>
+</div>
+</body>
+</html>

@@ -25,7 +25,7 @@ import java.util.Optional;
     @Override
     public Optional<Klant> findById(long id) {
         try {
-            var sql = "select id, familienaam, voornaam, straatnummer, postcode, gemeente from klanten id = ?";
+            var sql = "select id, familienaam, voornaam, straatnummer, postcode, gemeente from klanten where id = ?";
             return Optional.of(template.queryForObject(sql, klantRowMapper, id));
         } catch (IncorrectResultSizeDataAccessException ex) {
             return Optional.empty();

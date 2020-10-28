@@ -1,5 +1,6 @@
 package be.vdab.retrovideo.controllers;
 
+import be.vdab.retrovideo.domain.Film;
 import be.vdab.retrovideo.services.FilmService;
 import be.vdab.retrovideo.sessions.Mandje;
 import org.springframework.stereotype.Controller;
@@ -8,6 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Optional;
 
 @Controller
 @RequestMapping("mandje")
@@ -31,4 +34,27 @@ class MandjeController {
         return new ModelAndView("mandje",
                 "films",filmService.findByIds(mandje.getIds()));
     }
+
+
+    @PostMapping("verwijderen")
+    public String delete(String[] id) {
+        if (id != null) {
+            for ( String item : id) {
+                long filmId = Long.parseLong(item);
+                mandje.delete(filmId);
+            }
+        }
+        return "redirect:/mandje";
+    }
+//@PostMapping("wijzigen")
+//    public String update() {
+//       var ids= mandje.getIds();
+//    if (ids != null) {
+//        for ( long item : ids) {
+//            filmService.update(item);
+//        }
+//    }
+//    return "redirect:/mandje";
+//}
+
 }

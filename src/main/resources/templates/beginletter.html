@@ -1,17 +1,29 @@
 <!doctype html>
 <html lang="nl" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments::head(title='Beginletter')"></head>
+<nav th:fragment="menu">
+    <ul >
+        <li><a th:href="@{/genre}">Genres</a>
+            <a th:href="@{/mandje}">Mandje</a>
+            <a th:href="@{/klanten/beginletter/form}">Klant</a></li>
+    </ul></nav>
 <body>
+
 <h1>Van tot prijs</h1>
 <form th:object="${beginletterForm}"
-      method="get" th:action="@{klanten/beginletter}">
+      method="get" th:action="@{/klanten/beginletter}">
     <label>Beginletter::<span th:errors="*{beginletter}"></span><input th:field="*{beginletter}" autofocus></label>
     <button>Zoeken</button>
 </form>
 <ul th:if="${klanten}">
     <li th:each="klant:${klanten}">
-        <a th:href="@{/klanten/{id}/wijzigen/form(id=${klant.id})}"
-           th:text="${klant.familienaam}"></a></li>
+        <a th:href="@{/klanten/{id}/wijzigKlant(id=${klant.id})}"
+           th:text="${klant.getNaam()}"></a>
+
+
+    </li>
+
 </ul>
 </body>
 </html>
+

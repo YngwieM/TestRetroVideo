@@ -1,18 +1,27 @@
 package be.vdab.retrovideo.controllers;
 
+import be.vdab.retrovideo.domain.Film;
+import be.vdab.retrovideo.services.FilmService;
 import be.vdab.retrovideo.services.GenreService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 @Controller
-@RequestMapping("/")
+@RequestMapping("genre")
 public class GenreController {
     private final GenreService genreService;
+    private final FilmService filmService;
 
-    public GenreController(GenreService genreService) {
+
+    public GenreController(GenreService genreService, FilmService filmService) {
         this.genreService = genreService;
+
+        this.filmService = filmService;
     }
 
     @GetMapping
@@ -21,11 +30,15 @@ public class GenreController {
     }
 
 
-
-    @GetMapping("id")
-    public ModelAndView genre( long id) {
+    @GetMapping("{id}")
+    public ModelAndView genre(@PathVariable long id) {
         var modelAndView = new ModelAndView("genre");
-        genreService.findById(id).ifPresent(genre -> modelAndView.addObject(genre));
+
+
+        List<Film> films = filmService.findByGenreId(id);
+        modelAndView.addObject("films", films);
+        modelAndView.addObject("genres", genreService.findAll());
+
         return modelAndView;
     }
 
