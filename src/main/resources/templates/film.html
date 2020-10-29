@@ -4,9 +4,7 @@
 'Film niet gevonden' : ${film.naam})"></head>
 <body>
 <nav th:replace="fragments::menu"></nav>
-<!--<h1 th:if="not ${filmId}">Film niet gevonden:-->
-<!--    <span th:text="${id}"></span>-->
-<!--</h1>-->
+
 <div th:if="${film}" th:object="${film}">
     <h1 th:text="*{titel}"></h1>
 

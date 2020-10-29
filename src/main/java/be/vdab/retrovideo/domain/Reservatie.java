@@ -11,7 +11,6 @@ public class Reservatie {
     @NotNull
     private final int filmId;
     @NotNull
-    @DateTimeFormat(style = "S-")
     private final LocalDate reservatie;
 
     public Reservatie(@NotNull int klantId, @NotNull int filmId, @NotNull LocalDate reservatie) {

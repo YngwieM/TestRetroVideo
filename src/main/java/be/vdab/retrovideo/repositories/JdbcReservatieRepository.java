@@ -23,7 +23,7 @@ import java.util.Map;
     @Override
     public long create(Reservatie reservatie) {
         var kolomWaarden = Map.of("klantid", reservatie.getKlantId(),
-                "filmId", reservatie.getFilmId(),
+                "filmid", reservatie.getFilmId(),
                 "reservatie", reservatie.getReservatie());
         var id = insert.executeAndReturnKey(kolomWaarden);
         return id.longValue();
@@ -31,3 +31,5 @@ import java.util.Map;
 
 
 }
+
+

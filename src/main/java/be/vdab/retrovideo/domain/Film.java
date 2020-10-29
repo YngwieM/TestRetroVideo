@@ -10,7 +10,7 @@ public class Film {
     private final String titel;
     private final int voorraad;
     private final int gereserveerd;
-    @NumberFormat(pattern = "0,00") private final BigDecimal prijs;
+    private final BigDecimal prijs;
 
     public Film(long id, long genreId, String titel, int voorraad, int gereserveerd, BigDecimal prijs) {
         this.id = id;
@@ -43,5 +43,12 @@ public class Film {
 
     public BigDecimal getPrijs() {
         return prijs;
+    }
+
+    public boolean controle (int voorraad, int gereserveerd) {
+        if (voorraad - gereserveerd <= 0) {
+            return false;
+        }
+        return true;
     }
 }

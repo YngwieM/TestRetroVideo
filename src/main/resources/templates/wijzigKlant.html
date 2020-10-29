@@ -3,14 +3,17 @@
 <head th:replace="fragments::head(title='Bevestigen')"></head>
 <nav th:replace="fragments::menu"></nav>
 <body>
-<form  th:action="@{/klanten/{id}/wijzigKlant/wijzigen}"
-      method="post">
+
 
 <h1>Bevestigen</h1>
 
 <span th:text="${aantalFilms}"></span> film(s) voor <span th:text="${klant.getNaam()}"></span>
-    <li><button>Bevestigen</button></li>
-</form>
+
+    <form method="post" th:action="@{/klanten/{id}/wijzigKlant/wijzigen(id=${klant.id})}">
+        <button>Bevestigen</button>
+    </form>
+
+
 </body>
 
 </html>

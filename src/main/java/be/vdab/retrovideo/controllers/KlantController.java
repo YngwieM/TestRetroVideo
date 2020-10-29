@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Controller
@@ -65,28 +66,43 @@ import java.util.Set;
     }
 
     @PostMapping("{id}/wijzigKlant/wijzigen")
-    public void update() {
+    public void update(@PathVariable long id) {
         var ids = mandje.getIds();
         if (ids != null) {
             for (long item : ids) {
                 filmService.update(item);
+                int idInt = (int) id;
+                int itemInt = (int) item;
+                var res = new Reservatie(idInt, itemInt, LocalDate.now());
+                reservatieService.create(res);
 
             }
         }
+
     }
 }
-//
+
+//  een reservatie maken in reservaties
+//  Controle of voorraad - gereserveerd != 0 DAN
+//  de update doen in sql file(werkt) +
+
+
+
+
+
+//met alleen de update(films)
+
 //    @PostMapping("{id}/wijzigKlant/wijzigen")
-//    public void update(@PathVariable long id) {
+//    public void update() {
 //        var ids = mandje.getIds();
 //        if (ids != null) {
 //            for (long item : ids) {
 //                filmService.update(item);
-//                int idInt = (int) id;
-//                int itemInt = (int) item;
-//                var res = new Reservatie(idInt,itemInt,LocalDate.now());
-//                reservatieService.create(res);
 //
 //            }
 //        }
 //    }
+
+
+
+

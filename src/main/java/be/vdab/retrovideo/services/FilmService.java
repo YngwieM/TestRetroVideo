@@ -12,4 +12,5 @@ public interface FilmService {
     List<Film> findByGenreId(long id);
     List<Film> findByIds(Set<Long> ids);
     void update(long id);
+    void controle (int voorraad, int gereserveerd);
 }

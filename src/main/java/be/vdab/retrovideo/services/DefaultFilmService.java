@@ -38,7 +38,15 @@ import java.util.Set;
 
     @Override
     public void update(long id) {filmRepository.update(id);}
-}
+
+    @Override
+    public void controle(int voorraad, int gereserveerd){
+//        var check = controle(voorraad, gereserveerd);
+//        if (check == true) {
+
+        }
+    }
+
 
 
 

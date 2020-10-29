@@ -1,0 +1,1 @@
+insert into klanten(familienaam, voornaam, straatnummer, postcode, gemeente) VALUES('test','voortest',1,1000,'testville')

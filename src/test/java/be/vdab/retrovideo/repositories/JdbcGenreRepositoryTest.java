@@ -17,12 +17,17 @@ private final JdbcGenreRepository repository;
     JdbcGenreRepositoryTest(JdbcGenreRepository repository) {
         this.repository = repository;
     }
+
     private long idVanTestGenre() {
         return super.jdbcTemplate.queryForObject(
-                "select id from genres where naam='Aktiefilm'", Long.class);
+                "select id from genres where naam='test'", Long.class);
     }
     @Test
     void findById() {
-        assertThat(repository.findById(idVanTestGenre()).get().getNaam()).isEqualTo("Aktiefilm");
+        assertThat(repository.findById(idVanTestGenre()).get().getNaam()).isEqualTo("test");
+    }
+    @Test
+    void findByOnbestaandeIdVindtGeenGenre() {
+        assertThat(repository.findById(-1)).isNotPresent();
     }
 }
