@@ -65,16 +65,16 @@ import java.util.Set;
         return modelAndView;
     }
 
-    @PostMapping("{id}/wijzigKlant/wijzigen")
+    @PostMapping("{id}/wijzigKlant/wijzigen")      //  iets in code front/backend klopt niet, pagina toont niet
     public void update(@PathVariable long id) {
         var ids = mandje.getIds();
         if (ids != null) {
             for (long item : ids) {
-                filmService.update(item);
+                filmService.update(item);     //voert de update in films uit zelfs met foute pagina, nog geen controle op
                 int idInt = (int) id;
                 int itemInt = (int) item;
                 var res = new Reservatie(idInt, itemInt, LocalDate.now());
-                reservatieService.create(res);
+                reservatieService.create(res);    // voert dit niet uit, vind de fout niet
 
             }
         }
@@ -90,7 +90,7 @@ import java.util.Set;
 
 
 
-//met alleen de update(films)
+//met alleen de update(films), geeft ook fout in front end
 
 //    @PostMapping("{id}/wijzigKlant/wijzigen")
 //    public void update() {

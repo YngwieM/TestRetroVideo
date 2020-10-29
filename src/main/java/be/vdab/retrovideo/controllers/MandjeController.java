@@ -46,15 +46,6 @@ class MandjeController {
         }
         return "redirect:/mandje";
     }
-//@PostMapping("wijzigen")
-//    public String update() {
-//       var ids= mandje.getIds();
-//    if (ids != null) {
-//        for ( long item : ids) {
-//            filmService.update(item);
-//        }
-//    }
-//    return "redirect:/mandje";
-//}
+
 
 }
