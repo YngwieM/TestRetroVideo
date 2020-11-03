@@ -17,7 +17,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Set;
 
 @Controller
@@ -56,16 +55,16 @@ import java.util.Set;
 
     }
 
-    @GetMapping("{id}/wijzigKlant")
+    @GetMapping("{id}/reserveren")
     public ModelAndView wijzigenForm(@PathVariable long id) {
-        var modelAndView = new ModelAndView("wijzigKlant");
+        var modelAndView = new ModelAndView("reserveren");
         klantService.findById(id).ifPresent(klant -> modelAndView.addObject(klant));
         Set<Long> filmIds = mandje.getIds();
         modelAndView.addObject("aantalFilms", filmIds.size());
         return modelAndView;
     }
 
-    @PostMapping("{id}/wijzigKlant/wijzigen")      //  iets in code front/backend klopt niet, pagina toont niet
+    @PostMapping("{id}/reserveren/bevestiging")      //  iets in code front/backend klopt niet, pagina toont niet
     public void update(@PathVariable long id) {
         var ids = mandje.getIds();
         if (ids != null) {

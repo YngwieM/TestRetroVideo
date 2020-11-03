@@ -9,7 +9,7 @@
 
 <span th:text="${aantalFilms}"></span> film(s) voor <span th:text="${klant.getNaam()}"></span>
 
-    <form method="post" th:action="@{/klanten/{id}/wijzigKlant/wijzigen(id=${klant.id})}">
+    <form method="post" th:action="@{/klanten/{id}/reserveren/bevestiging(id=${klant.id})}">
         <button>Bevestigen</button>
     </form>
 

@@ -45,10 +45,9 @@ public class Film {
         return prijs;
     }
 
-    public boolean controle (int voorraad, int gereserveerd) {
-        if (voorraad - gereserveerd <= 0) {
-            return false;
-        }
-        return true;
+    public int aantalBeschikbaar() {
+        return voorraad - gereserveerd;
+
+
     }
 }

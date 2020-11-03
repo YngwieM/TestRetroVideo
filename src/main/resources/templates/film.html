@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="nl" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments::head(title=${filmId} == null ?
-'Film niet gevonden' : ${film.naam})"></head>
+'Film niet gevonden' : ${film.titel})"></head>
 <body>
 <nav th:replace="fragments::menu"></nav>
 
@@ -13,17 +13,18 @@
 
     <dl>
         <dt>Prijs</dt>
-        <dd th:text="${film.getPrijs()}"></dd>
+        <dd th:text="*{getPrijs()}"></dd>
         <dt>Voorraad</dt>
-        <dd th:text="${film.getVoorraad()}"></dd>
+        <dd th:text="*{getVoorraad()}"></dd>
         <dt>Gereserveerd</dt>
-        <dd th:text="${film.getGereserveerd()}"></dd>
+        <dd th:text="*{getGereserveerd()}"></dd>
         <dt>Beschikbaar</dt>
-        <dd th:text="${film.getVoorraad() - film.getGereserveerd()}"></dd>
+        <dd th:text="*{aantalBeschikbaar()}"></dd>
 
     </dl>
     <form method="post" th:action="@{/mandje/{id}(id=*{id})}">
-        <button>In mandje</button>
+        <button th:if="${film.aantalBeschikbaar()} > 0" >In Mandje</button>
+
     </form>
 </div>
 </body>
