@@ -7,23 +7,23 @@ import java.time.LocalDate;
 
 public class Reservatie {
     @NotNull
-    private final int klantId;
+    private final long klantId;
     @NotNull
-    private final int filmId;
+    private final long filmId;
     @NotNull
     private final LocalDate reservatie;
 
-    public Reservatie(@NotNull int klantId, @NotNull int filmId, @NotNull LocalDate reservatie) {
+    public Reservatie(@NotNull long klantId, @NotNull long filmId, @NotNull LocalDate reservatie) {
         this.klantId = klantId;
         this.filmId = filmId;
         this.reservatie = reservatie;
     }
 
-    public int getKlantId() {
+    public long getKlantId() {
         return klantId;
     }
 
-    public int getFilmId() {
+    public long getFilmId() {
         return filmId;
     }
 

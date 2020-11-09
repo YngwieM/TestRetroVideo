@@ -60,7 +60,7 @@ import java.util.*;
 
     @Override
     public void update(long id) {
-        var sql = "update films set voorraad = voorraad - 1, gereserveerd = gereserveerd + 1 where id = ?";
+        var sql = "update films set gereserveerd = gereserveerd + 1 where id = ? and voorraad>gereserveerd";
         template.update(sql,id);
 
 

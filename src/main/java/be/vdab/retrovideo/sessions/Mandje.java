@@ -20,4 +20,5 @@ public class Mandje implements Serializable {
     public Set<Long> getIds() {
         return ids;
     }
+
 }

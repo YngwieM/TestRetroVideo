@@ -55,52 +55,29 @@ import java.util.Set;
 
     }
 
-    @GetMapping("{id}/reserveren")
+    @GetMapping("{id}/bevestigen")
     public ModelAndView wijzigenForm(@PathVariable long id) {
-        var modelAndView = new ModelAndView("reserveren");
+        var modelAndView = new ModelAndView("bevestigen");
         klantService.findById(id).ifPresent(klant -> modelAndView.addObject(klant));
         Set<Long> filmIds = mandje.getIds();
         modelAndView.addObject("aantalFilms", filmIds.size());
         return modelAndView;
     }
 
-    @PostMapping("{id}/reserveren/bevestiging")      //  iets in code front/backend klopt niet, pagina toont niet
-    public void update(@PathVariable long id) {
-        var ids = mandje.getIds();
-        if (ids != null) {
-            for (long item : ids) {
-                filmService.update(item);     //voert de update in films uit zelfs met foute pagina, nog geen controle op
-                int idInt = (int) id;
-                int itemInt = (int) item;
-                var res = new Reservatie(idInt, itemInt, LocalDate.now());
-                reservatieService.create(res);    // voert dit niet uit, vind de fout niet
-
-            }
-        }
-
-    }
-}
-
-//  een reservatie maken in reservaties
-//  Controle of voorraad - gereserveerd != 0 DAN
-//  de update doen in sql file(werkt) +
-
-
-
-
-
-//met alleen de update(films), geeft ook fout in front end
-
-//    @PostMapping("{id}/wijzigKlant/wijzigen")
-//    public void update() {
+//    @PostMapping("{id}/reserveren/bevestiging")
+//    public String update(@PathVariable long id) {
 //        var ids = mandje.getIds();
 //        if (ids != null) {
 //            for (long item : ids) {
-//                filmService.update(item);
-//
+//                var res = new Reservatie(id, item, LocalDate.now());
+//                reservatieService.create(res);
 //            }
 //        }
+//        return "redirect:/";
 //    }
+}
+
+
 
 
 

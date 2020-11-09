@@ -17,7 +17,7 @@
 </form>
 <ul th:if="${klanten}">
     <li th:each="klant:${klanten}">
-        <a th:href="@{/klanten/{id}/reserveren(id=${klant.id})}"
+        <a th:href="@{/klanten/{id}/bevestigen(id=${klant.id})}"
            th:text="${klant.getNaam()}"></a>
 
 

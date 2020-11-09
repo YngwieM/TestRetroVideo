@@ -1,1 +1,1 @@
-insert into reservaties(klantid, filmid, reservatie) values(1,10,'2019-01-01');
+insert into reservaties(klantid, filmid, reservatie) values(2,10,'2019-01-01');

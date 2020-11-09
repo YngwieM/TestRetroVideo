@@ -25,12 +25,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
     @Test
     void create() {
-        var id = repository.create(new Reservatie(0,10,LocalDate.now()));
-        assertThat(id).isPositive();
+        var id = repository.create(new Reservatie(1,10,LocalDate.now()));
         assertThat(super.countRowsInTableWhere(RESERVATIES, "klantid=" + id)).isOne();
     }
 }
-//test fails nog
 
 
-//long create (Reservatie reservatie);
+

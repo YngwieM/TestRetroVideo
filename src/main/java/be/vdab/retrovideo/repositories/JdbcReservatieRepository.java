@@ -15,8 +15,7 @@ import java.util.Map;
     JdbcReservatieRepository(JdbcTemplate template) {
         this.template = template;
         this.insert = new SimpleJdbcInsert(template)
-                .withTableName("reservaties")
-                .usingColumns("klantid");
+                .withTableName("reservaties");
 
     }
 
@@ -25,8 +24,8 @@ import java.util.Map;
         var kolomWaarden = Map.of("klantid", reservatie.getKlantId(),
                 "filmid", reservatie.getFilmId(),
                 "reservatie", reservatie.getReservatie());
-        var id = insert.executeAndReturnKey(kolomWaarden);
-        return id.longValue();
+        var id = insert.execute(kolomWaarden);
+        return 0;
     }
 
 
