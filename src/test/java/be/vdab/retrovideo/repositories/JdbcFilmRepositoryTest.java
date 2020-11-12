@@ -49,8 +49,6 @@ public class JdbcFilmRepositoryTest extends AbstractTransactionalJUnit4SpringCon
         var id = idVanTestFilm();
         repository.update(id);
         assertThat(super.jdbcTemplate.queryForObject(
-                "select voorraad from films where id=?", BigDecimal.class, id)).isEqualTo("2");
-        assertThat(super.jdbcTemplate.queryForObject(
                 "select gereserveerd from films where id=?", BigDecimal.class, id)).isOne();
     }
     @Test

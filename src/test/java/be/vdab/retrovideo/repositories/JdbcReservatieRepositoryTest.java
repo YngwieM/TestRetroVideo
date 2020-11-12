@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @JdbcTest
 @Import(JdbcReservatieRepository.class)
-@Sql("/insertReservaties.sql")
+@Sql({"/insertKlanten.sql", "/insertGenres.sql","/insertFilms.sql"})
  class JdbcReservatieRepositoryTest extends AbstractTransactionalJUnit4SpringContextTests {
     private final JdbcReservatieRepository repository;
     private static final String RESERVATIES = "reservaties";
@@ -23,11 +23,23 @@ import static org.assertj.core.api.Assertions.assertThat;
         this.repository = repository;
     }
 
+    private long idVanTestKlant() {
+        return super.jdbcTemplate.queryForObject("select id from klanten where voornaam='test'", Long.class);
+    }
+
+    private long idVanTestFilm() {
+        return super.jdbcTemplate.queryForObject("select id from films where titel='test'", Long.class);
+    }
+
+
     @Test
     void create() {
-        var id = repository.create(new Reservatie(1,10,LocalDate.now()));
-        assertThat(super.countRowsInTableWhere(RESERVATIES, "klantid=" + id)).isOne();
+        var idTestKlant = idVanTestKlant();
+        var idTestFilm = idVanTestFilm();
+        repository.create(new Reservatie(idTestKlant, idTestFilm, LocalDate.now()));
+        assertThat(this.countRowsInTableWhere(RESERVATIES, "klantid=" + idTestKlant + " and filmid=" + idTestFilm)).isOne();
     }
+
 }
 
 
